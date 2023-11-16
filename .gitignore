@@ -1,0 +1,3 @@
+# git ignore docs: https://git-scm.com/docs/gitignore 
+usr/
+/todo.md
