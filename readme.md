@@ -34,6 +34,7 @@ If you just want to use the bot just for yourself, there is very little to do. I
 5. Run the script with `python script_name.py`.
 
 The bot only runs if the script is running. If you want the bot to run as long as your machine is running, you might want to add the script to your startup applications.
+I've provided easy to configure `.sh` and `.bat` scripts in the startup_scripts folder for this purpose. Just replace the filepath and add it to startup, then it should run.
 
 <!--Links and Images-->
 [python]:https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white
