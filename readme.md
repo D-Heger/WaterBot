@@ -27,7 +27,7 @@ If you just want to use the bot for yourself, there is very little to do. If you
 2. Create an Application.
     1. (And potentially note the Bot Token. If it was not displayed yet, don't worry about it.)
 3. Invite the bot to a server of yours.
-    1.You can follow [this tutorial][bot-adding-tutorial] as guidance.
+    1. You can follow [this tutorial][bot-adding-tutorial] as guidance.
 4. In the script, add your User ID and Bot Token.
     1. Here is a [short tutorial][user-id-tutorial] how to get your User ID.
     2. If you could copy your Bot Token already, just insert it. If not, open the application on the discord dev portal and head to the bot submenu. There, click on reset token and copy paste it into the script.  
