@@ -1,42 +1,46 @@
 import discord
+import sys
+import os
+# Add the parent directory to sys.path to make the 'usr' package available
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+from usr.config import BotConfig
+
 from discord.ext import commands, tasks
 
-USER_ID = 0 # Replace with your Discord user ID
-BOT_TOKEN = '' # Replace with your bot token
+class WaterBot(commands.Bot):
+    def __init__(self, config):
+        intents = discord.Intents.default()
+        intents.messages = True
+        super().__init__(command_prefix='!', intents=intents)
 
-REMINDER_INTERVAL = 30  # Interval in minutes
-MESSAGE = "Don't forget to drink water! 💧" # The message to send
-DEBUG_KEYWORD = 'debug'  # The keyword to trigger the debug response
+        self.config = config
+        self.water_reminder_task = tasks.loop(minutes=self.config.REMINDER_INTERVAL)(self.water_reminder)
 
-intents = discord.Intents.default()
-intents.messages = True
-client = commands.Bot(command_prefix='!', intents=intents)
+    async def water_reminder(self):
+        user = await self.fetch_user(self.config.USER_ID)
+        channel = await user.create_dm()
 
-@tasks.loop(minutes=REMINDER_INTERVAL)
-async def water_reminder():
-    user = await client.fetch_user(USER_ID)
-    channel = await user.create_dm()
-    
-    # Delete previous bot messages
-    async for message in channel.history(limit=5):
-        if message.author == client.user:
-            await message.delete()
-    
-    # Send reminder
-    await channel.send(MESSAGE)
+        # Delete previous bot messages
+        async for message in channel.history(limit=5):
+            if message.author == self.user:
+                await message.delete()
 
-@client.event
-async def on_ready():
-    print(f'Logged in as {client.user}')
-    await water_reminder()
-    water_reminder.start()
+        # Send reminder
+        await channel.send(self.config.MESSAGE)
 
-@client.event
-async def on_message(message):
-    if message.author == client.user:
-        return
+    async def on_ready(self):
+        print(f'Logged in as {self.user}')
+        self.water_reminder_task.start()
 
-    if message.content == DEBUG_KEYWORD and isinstance(message.channel, discord.DMChannel):
-        await water_reminder()
+    async def on_message(self, message):
+        if message.author == self.user: 
+            return
 
-client.run(BOT_TOKEN)
+        if message.content == 'debug' and isinstance(message.channel, discord.DMChannel):
+            await self.water_reminder()
+
+if __name__ == "__main__":
+    config = BotConfig()
+    bot = WaterBot(config)
+    bot.run(config.BOT_TOKEN)
