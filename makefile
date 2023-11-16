@@ -19,4 +19,7 @@ push-latest:
 version: build-version push-version
 latest: build-latest push-latest
 
+run-latest: 
+	docker run -e REMINDER_INTERVAL=60 -e USER_ID=123456789 -e MESSAGE="Time to drink water!" -e BOT_TOKEN=abcd1234 $(TAG_LATEST)
+
 .PHONY: build push
