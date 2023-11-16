@@ -5,7 +5,6 @@ LABEL Maintainer="container@nilsherzig.com"
 WORKDIR /waterbot
 
 COPY ./src /waterbot/src
-COPY ./usr /waterbot/usr
 
 RUN pip install discord.py
 
