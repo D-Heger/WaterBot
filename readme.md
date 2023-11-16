@@ -10,7 +10,7 @@ WaterBot is a simple discord bot script to send direct messages to a user, as to
 - discord.py | `pip install discord.py`
 
 ### Usage
-If you just want to use the bot just for yourself, there is very little to do. If you instead intend on messaging more than one user, you'll need to fork and rework this code.
+If you just want to use the bot for yourself, there is very little to do. If you instead intend on messaging more than one user, you'll need to fork and rework this code.
 
 ### Features
 - The bot is able to send a direct message to one specified user.
