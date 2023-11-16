@@ -1,24 +1,20 @@
 import discord
-import sys
-import os
-# Add the parent directory to sys.path to make the 'usr' package available
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
-from usr.config import BotConfig
-
 from discord.ext import commands, tasks
+import os
 
 class WaterBot(commands.Bot):
-    def __init__(self, config):
+    def __init__(self):
         intents = discord.Intents.default()
         intents.messages = True
         super().__init__(command_prefix='!', intents=intents)
 
-        self.config = config
-        self.water_reminder_task = tasks.loop(minutes=self.config.REMINDER_INTERVAL)(self.water_reminder)
+        self.reminder_interval = int(os.environ.get('REMINDER_INTERVAL', 60))  # Default to 60 minutes if not set
+        self.user_id = int(os.environ['USER_ID'])  # Raises an error if not set
+        self.message = os.environ['MESSAGE']  # Raises an error if not set
+        self.water_reminder_task = tasks.loop(minutes=self.reminder_interval)(self.water_reminder)
 
     async def water_reminder(self):
-        user = await self.fetch_user(self.config.USER_ID)
+        user = await self.fetch_user(self.user_id)
         channel = await user.create_dm()
 
         # Delete previous bot messages
@@ -27,7 +23,7 @@ class WaterBot(commands.Bot):
                 await message.delete()
 
         # Send reminder
-        await channel.send(self.config.MESSAGE)
+        await channel.send(self.message)
 
     async def on_ready(self):
         print(f'Logged in as {self.user}')
@@ -41,6 +37,6 @@ class WaterBot(commands.Bot):
             await self.water_reminder()
 
 if __name__ == "__main__":
-    config = BotConfig()
-    bot = WaterBot(config)
-    bot.run(config.BOT_TOKEN)
+    bot_token = os.environ['BOT_TOKEN']  # Raises an error if not set
+    bot = WaterBot()
+    bot.run(bot_token)
