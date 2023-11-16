@@ -5,7 +5,8 @@ USER_ID = 0 # Replace with your Discord user ID
 BOT_TOKEN = '' # Replace with your bot token
 
 REMINDER_INTERVAL = 30  # Interval in minutes
-DEBUG_KEYWORD = "debug"  # The keyword to trigger the debug response
+MESSAGE = "Don't forget to drink water! 💧" # The message to send
+DEBUG_KEYWORD = 'debug'  # The keyword to trigger the debug response
 
 intents = discord.Intents.default()
 intents.messages = True
@@ -22,7 +23,7 @@ async def water_reminder():
             await message.delete()
     
     # Send reminder
-    await channel.send("Don't forget to drink water! 💧")
+    await channel.send(MESSAGE)
 
 @client.event
 async def on_ready():
@@ -35,7 +36,7 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    if message.content == 'debug' and isinstance(message.channel, discord.DMChannel):
+    if message.content == DEBUG_KEYWORD and isinstance(message.channel, discord.DMChannel):
         await water_reminder()
 
 client.run(BOT_TOKEN)
