@@ -15,13 +15,11 @@ If you just want to use the bot just for yourself, there is very little to do. I
 ### Features
 - The bot is able to send a direct message to one specified user.
     - The message reads "Don't forget to drink water! 💧".
-        - This can easily be changed by editing the global message variable.
     - The message will be send once at startup, then every 30 minutes after.
-        - The time can easily be changed in the code, using the global variables.
     - The bot will delete its previously sent message, before sending a new one.
         - This will help keep the chat clean.
     - The message can also be triggered by sending the message "debug" to the bot.
-        - The message content that triggers the bot to send can easily be changed using the global variable.
+- All these values can be easily edited inside the config file.
 
 
 ### How to setup
