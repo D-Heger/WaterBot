@@ -2,6 +2,9 @@
 
 WaterBot is a simple discord bot script to send direct messages to a user, as to remind them to drink enough water. Currently, it is very simple and offers just the baseline functionalities needed. 
 
+[![Stargazers][stars-shield]][stars-url]
+[![Forks][forks-shield]][forks-url]
+
 ### Built with
 [![Python][python]][python-url]
 
@@ -42,3 +45,7 @@ I've provided easy to configure `.sh` and `.bat` scripts in the startup_scripts 
 [discord-dev-portal-url]:https://discord.com/developers/applications
 [bot-adding-tutorial]:https://discordpy.readthedocs.io/en/stable/discord.html#inviting-your-bot
 [user-id-tutorial]:https://support.discord.com/hc/en-us/articles/206346498-Where-can-I-find-my-User-Server-Message-ID-
+[stars-shield]:https://img.shields.io/github/stars/D-Heger/WaterBot
+[stars-url]:https://github.com/D-Heger/WaterBot/stargazers
+[forks-shield]:https://img.shields.io/github/forks/D-Heger/WaterBot
+[forks-url]:https://github.com/D-Heger/WaterBot/forks
